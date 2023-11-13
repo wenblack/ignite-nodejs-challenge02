@@ -1,5 +1,5 @@
 <h1 align="center">
-  Project 02 - Node JS
+  Challenge 02 - Ignite Node JS
 </h1>
 
 <h3 align="center">
@@ -8,18 +8,18 @@
 
 <br>
 <p align="center">
-<img alt="GitHub top language" src="https://img.shields.io/github/languages/top/wenblack/ignite-nodejs-project02">
+<img alt="GitHub top language" src="https://img.shields.io/github/languages/top/wenblack/ignite-node-js-challenge02">
   <a href="https://www.linkedin.com/in/eliasgcf/">
     <img alt="Made by" src="https://img.shields.io/badge/made%20by-Wender%20Barbosa-gree">
   </a>
-  <img alt="Repository size" src="https://img.shields.io/github/repo-size/wenblack/ignite-nodejs-project02">
-  <a href="https://github.com/wenblack/ignite-nodejs-project02/commits/master">
-  <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/wenblack/ignite-nodejs-project02">
+  <img alt="Repository size" src="https://img.shields.io/github/repo-size/wenblack/ignite-node-js-challenge02">
+  <a href="https://github.com/wenblack/ignite-node-js-challenge02/commits/master">
+  <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/wenblack/ignite-node-js-challenge02">
   </a>
-  <a href="https://github.com/wenblack/ignite-nodejs-project02/issues">
-    <img alt="Repository issues" src="https://img.shields.io/github/issues/wenblack/ignite-nodejs-project02">
+  <a href="https://github.com/wenblack/ignite-node-js-challenge02/issues">
+    <img alt="Repository issues" src="https://img.shields.io/github/issues/wenblack/ignite-node-js-challenge02">
   </a>
-  <img alt="GitHub" src="https://img.shields.io/github/license/wenblack/ignite-nodejs-project02">
+  <img alt="GitHub" src="https://img.shields.io/github/license/wenblack/ignite-node-js-challenge02">
 </p>
 
 <p align="center">
@@ -47,7 +47,7 @@ Technologies that I used to develop this api
 - [Node.js](https://nodejs.org/en/)
 - [TypeScript](https://www.typescriptlang.org/)
 - [Fastify](https://fastify.dev/)
-- [Knex](https://knexjs.org/)
+- [Prisma ORM](https://www.prisma.io/)
 - [@fastify/cookie](https://github.com/fastify/fastify-cookie)
 - [Vitest](https://vitest.dev/)
 - [Eslint](https://eslint.org/)
@@ -71,7 +71,7 @@ Create your own .env file using the .env.example file from project.
 **Clone the project and access the folder**
 
 ```bash
-$ git clone https://github.com/wenblack/ignite-nodejs-project02.git && cd ignite-nodejs-project02
+$ git clone https://github.com/wenblack/ignite-node-js-challenge02.git && cd ignite-node-js-challenge02
 ```
 
 **Follow the steps below**
@@ -81,7 +81,10 @@ $ git clone https://github.com/wenblack/ignite-nodejs-project02.git && cd ignite
 $ yarn
 
 # Once the services are running, run the migrations
-$ yarn knex migrate:latest
+$ npx prisma migrate dev
+
+# 🌱 Seed Database
+$ npx prisma migrate dev
 
 # To finish, run the api service
 $ yarn dev
@@ -97,14 +100,14 @@ $ yarn dev
 # Fork using GitHub official command line
 # If you don't have the GitHub CLI, use the web site to do that.
 
-$ gh repo fork wenblack/ignite-nodejs-project02
+$ gh repo fork https://github.com/wenblack/ignite-node-js-challenge02
 ```
 
 **Follow the steps below**
 
 ```bash
 # Clone your fork
-$ git clone your-fork-url && cd ignite-nodejs-project02
+$ git clone https://github.com/wenblack/ignite-node-js-challenge02 && cd ignite-node-js-challenge02
 
 # Create a branch with your feature
 $ git checkout -b my-feature
