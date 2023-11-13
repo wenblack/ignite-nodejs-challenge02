@@ -1,12 +1,12 @@
 import { FastifyInstance } from 'fastify'
 import { z } from 'zod'
 import { PrismaClient } from '@prisma/client'
-import { AuthenticationMidleware } from '../middlewares/auth'
+import { AuthenticationMiddleware } from '../middlewares/auth'
 
 const prisma = new PrismaClient()
 
 export async function mealsRoutes(app: FastifyInstance) {
-  app.get('', { preHandler: [AuthenticationMidleware] }, async (req) => {
+  app.get('', { preHandler: [AuthenticationMiddleware] }, async (req) => {
     const email = req.cookies.userID
 
     const meals = await prisma.meal.findMany({
@@ -17,7 +17,7 @@ export async function mealsRoutes(app: FastifyInstance) {
     return { meals }
   })
 
-  app.get('/:id', { preHandler: [AuthenticationMidleware] }, async (req) => {
+  app.get('/:id', { preHandler: [AuthenticationMiddleware] }, async (req) => {
     const email = req.cookies.userID
     const transactionParamsSchema = z.object({
       id: z.string().uuid(),
@@ -38,13 +38,30 @@ export async function mealsRoutes(app: FastifyInstance) {
     return { meal }
   })
 
-  /* app.get('/meals/summary', async (req) => {
-    const sessionId = req.cookies.sessionId
-    const summary = await knex('transactions')
-      .where('session_id', sessionId)
-      .sum('amount', { as: 'amount' })
-      .first()
-    return { summary }
+  app.post('', async (req, res) => {
+    const email = req.cookies.userID
+    const transactionBodySchema = z.object({
+      name: z.string(),
+      description: z.string(),
+      isOnTheDiet: z.boolean(),
+    })
+    const { name, description, isOnTheDiet } = transactionBodySchema.parse(
+      req.body,
+    )
+
+    const hasUser = await prisma.user.findUnique({
+      where: {
+        email,
+      },
+    })
+    await prisma.meal.create({
+      data: {
+        name,
+        description,
+        isOnTheDiet,
+        userEmail: String(hasUser?.email),
+      },
+    })
+    return res.status(201).send()
   })
-*/
 }

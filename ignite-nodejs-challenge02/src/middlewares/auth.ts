@@ -1,6 +1,6 @@
 import { FastifyReply, FastifyRequest } from 'fastify'
 
-export async function AuthenticationMidleware(
+export async function AuthenticationMiddleware(
   req: FastifyRequest,
   res: FastifyReply,
 ) {
