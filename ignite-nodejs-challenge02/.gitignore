@@ -1,0 +1,14 @@
+# Dependencies and Lock Files
+node_modules
+package-lock.json
+yarn.lock
+
+# Database 
+database/*.db
+
+#Environment
+.env
+.env.test
+
+#Build
+build
