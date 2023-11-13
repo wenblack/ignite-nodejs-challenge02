@@ -1,11 +1,12 @@
 import { FastifyInstance } from 'fastify'
 import { z } from 'zod'
 import { PrismaClient } from '@prisma/client'
+import { AuthenticationMidleware } from '../middlewares/auth'
 
 const prisma = new PrismaClient()
 
 export async function mealsRoutes(app: FastifyInstance) {
-  app.get('', async (req) => {
+  app.get('', { preHandler: [AuthenticationMidleware] }, async (req) => {
     const email = req.cookies.userID
 
     const meals = await prisma.meal.findMany({
@@ -16,7 +17,7 @@ export async function mealsRoutes(app: FastifyInstance) {
     return { meals }
   })
 
-  app.get('/:id', async (req) => {
+  app.get('/:id', { preHandler: [AuthenticationMidleware] }, async (req) => {
     const email = req.cookies.userID
     const transactionParamsSchema = z.object({
       id: z.string().uuid(),
