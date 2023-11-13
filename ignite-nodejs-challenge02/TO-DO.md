@@ -1,12 +1,11 @@
-# RF
+# APP RULES
 
-- [x] O usuário deve poder obter um resumo da sua conta;
-- [x] O usuário deve poder criar uma nova transação;
-- [x] O usuário deve poder listar todas transações que já ocorreram;
-- [x] O usuário deve poder visualizar uma transação única;
-
-# RN
-
-- [x] A transação pode ser do tipo crédito que somará ao valor total, ou débito subtrairá;
-- [x] Deve ser possível identificarmos o usuário entre as requisições;
-- [x] O usuário só pode visualizar transações o qual ele criou;
+- [x] Deve ser possível criar um usuário
+- [x] Deve ser possível identificar o usuário entre as requisições
+- [x] Deve ser possível listar todas as refeições de um usuário
+- [x] Deve ser possível visualizar uma única refeição
+- [x] O usuário só pode visualizar, editar e apagar as refeições o qual ele criou
+- [ ] Deve ser possível registrar uma refeição feita
+- [ ] Deve ser possível editar uma refeição
+- [ ] Deve ser possível apagar uma refeição
+- [ ] Deve ser possível recuperar as métricas de um usuário (Total de refeições, refeições dentro da dieta, refeições fora da dieta, sequência de refeições dentro da dieta)
