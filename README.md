@@ -24,6 +24,7 @@
 
 <p align="center">
   <a href="#-about-the-project">About the project</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#-application-features">License</a>
   <a href="#-technologies">Technologies</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#-getting-started">Getting started</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#-how-to-contribute">How to contribute</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
@@ -39,6 +40,17 @@
 - <p style="color: red;">Rest API made in node course of RocketSeat</p>
 
 
+## 🧩 Application Features 
+
+- [x] It must be possible to create a user
+- [x] It must be possible to identify the user between requests
+- [x] It should be possible to list all of a user's meals
+- [x] It must be possible to view a single meal
+- [x] The user can only view, edit and delete the meals he created
+- [x] It must be possible to record a meal eaten
+- [ ] It should be possible to edit a meal
+- [ ] It must be possible to delete a meal
+- [ ] It must be possible to retrieve a user's metrics (Total meals, meals within the diet, meals outside the diet, sequence of meals within the diet)
 
 ## 🚀 Technologies
 
