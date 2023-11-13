@@ -84,7 +84,7 @@ $ yarn
 $ npx prisma migrate dev
 
 # 🌱 Seed Database
-$ npx prisma migrate dev
+$ yarn seed
 
 # To finish, run the api service
 $ yarn dev
