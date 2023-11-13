@@ -8,18 +8,18 @@
 
 <br>
 <p align="center">
-<img alt="GitHub top language" src="https://img.shields.io/github/languages/top/wenblack/ignite-node-js-challenge02">
-  <a href="https://www.linkedin.com/in/eliasgcf/">
+<img alt="GitHub top language" src="https://img.shields.io/github/languages/top/wenblack/ignite-nodejs-challenge02">
+  <a href="https://www.github.com/wenblack">
     <img alt="Made by" src="https://img.shields.io/badge/made%20by-Wender%20Barbosa-gree">
   </a>
-  <img alt="Repository size" src="https://img.shields.io/github/repo-size/wenblack/ignite-node-js-challenge02">
-  <a href="https://github.com/wenblack/ignite-node-js-challenge02/commits/master">
-  <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/wenblack/ignite-node-js-challenge02">
+  <img alt="Repository size" src="https://img.shields.io/github/repo-size/wenblack/ignite-nodejs-challenge02">
+  <a href="https://github.com/wenblack/ignite-nodejs-challenge02/commits/master">
+  <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/wenblack/ignite-nodejs-challenge02">
   </a>
-  <a href="https://github.com/wenblack/ignite-node-js-challenge02/issues">
-    <img alt="Repository issues" src="https://img.shields.io/github/issues/wenblack/ignite-node-js-challenge02">
+  <a href="https://github.com/wenblack/ignite-nodejs-challenge02/issues">
+    <img alt="Repository issues" src="https://img.shields.io/github/issues/wenblack/ignite-nodejs-challenge02">
   </a>
-  <img alt="GitHub" src="https://img.shields.io/github/license/wenblack/ignite-node-js-challenge02">
+  <img alt="GitHub" src="https://img.shields.io/github/license/wenblack/ignite-nodejs-challenge02">
 </p>
 
 <p align="center">
@@ -71,7 +71,7 @@ Create your own .env file using the .env.example file from project.
 **Clone the project and access the folder**
 
 ```bash
-$ git clone https://github.com/wenblack/ignite-node-js-challenge02.git && cd ignite-node-js-challenge02
+$ git clone https://github.com/wenblack/ignite-nodejs-challenge02.git && cd ignite-nodejs-challenge02
 ```
 
 **Follow the steps below**
@@ -100,14 +100,14 @@ $ yarn dev
 # Fork using GitHub official command line
 # If you don't have the GitHub CLI, use the web site to do that.
 
-$ gh repo fork https://github.com/wenblack/ignite-node-js-challenge02
+$ gh repo fork https://github.com/wenblack/ignite-nodejs-challenge02
 ```
 
 **Follow the steps below**
 
 ```bash
 # Clone your fork
-$ git clone https://github.com/wenblack/ignite-node-js-challenge02 && cd ignite-node-js-challenge02
+$ git clone https://github.com/wenblack/ignite-nodejs-challenge02 && cd ignite-nodejs-challenge02
 
 # Create a branch with your feature
 $ git checkout -b my-feature
