@@ -82,4 +82,38 @@ export async function mealsRoutes(app: FastifyInstance) {
     }
     return res.status(201).send()
   })
+
+  app.delete(
+    '/:id',
+    { preHandler: [AuthenticationMiddleware] },
+    async (req) => {
+      const email = req.cookies.userID
+      const transactionParamsSchema = z.object({
+        id: z.string().uuid(),
+      })
+      const { id } = transactionParamsSchema.parse(req.params)
+      const hasUser = await prisma.user.findUnique({
+        where: {
+          email,
+        },
+      })
+      const lastHealthFoodStreak = Number(hasUser?.healthFoodStreak)
+      const deletedMeal = await prisma.meal.delete({
+        where: {
+          id,
+          userEmail: email,
+        },
+      })
+      if (lastHealthFoodStreak >= 1 && deletedMeal.isOnTheDiet) {
+        await prisma.user.update({
+          where: { email: hasUser?.email },
+          data: {
+            healthFoodStreak: lastHealthFoodStreak - 1,
+          },
+        })
+      }
+
+      return { message: 'Meal deleted!' }
+    },
+  )
 }
