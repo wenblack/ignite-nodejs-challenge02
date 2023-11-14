@@ -54,6 +54,8 @@ export async function mealsRoutes(app: FastifyInstance) {
         email,
       },
     })
+
+    const lastHealthFoodStreak = Number(hasUser?.healthFoodStreak)
     await prisma.meal.create({
       data: {
         name,
@@ -62,6 +64,22 @@ export async function mealsRoutes(app: FastifyInstance) {
         userEmail: String(hasUser?.email),
       },
     })
+
+    if (isOnTheDiet === false) {
+      await prisma.user.update({
+        where: { email: hasUser?.email },
+        data: {
+          healthFoodStreak: 0,
+        },
+      })
+    } else if (isOnTheDiet === true) {
+      await prisma.user.update({
+        where: { email: hasUser?.email },
+        data: {
+          healthFoodStreak: lastHealthFoodStreak + 1,
+        },
+      })
+    }
     return res.status(201).send()
   })
 }
