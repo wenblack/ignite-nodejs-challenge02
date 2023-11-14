@@ -50,7 +50,7 @@
 - [x] It must be possible to record a meal eaten
 - [x] It must be possible to delete a meal
 - [x] It should be possible to edit a meal
-- [ ] It must be possible to retrieve a user's metrics (Total meals, meals within the diet, meals outside the diet, sequence of meals within the diet)
+- [x] It must be possible to retrieve a user's metrics (Total meals, meals within the diet, meals outside the diet, sequence of meals within the diet)
 
 ## 🚀 Technologies
 
