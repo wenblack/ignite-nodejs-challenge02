@@ -10,8 +10,8 @@ datasource db {
 model User {
   id               String @id @default(uuid())
   email            String @unique
-  meals            Meal[]
   healthFoodStreak Int    @default(0)
+  meals            Meal[]
 }
 
 model Meal {
@@ -20,6 +20,6 @@ model Meal {
   description String?
   createdAt   DateTime @default(now())
   isOnTheDiet Boolean  @default(false)
-  user        User     @relation(fields: [userEmail], references: [email])
   userEmail   String
+  user        User     @relation(fields: [userEmail], references: [email])
 }

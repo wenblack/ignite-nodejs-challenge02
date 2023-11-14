@@ -3,112 +3,147 @@ import request from 'supertest'
 import { app } from '../src/app'
 import { execSync } from 'node:child_process'
 
-describe('Meals Routes', () => {
-  beforeAll(async () => {
-    await app.ready()
-  })
+beforeAll(async () => {
+  await app.ready()
+})
 
-  afterAll(async () => {
-    await app.close()
-  })
+afterAll(async () => {
+  await app.close()
+})
 
-  beforeEach(async () => {
-    execSync('yarn knex migrate:rollback --all')
-    execSync('yarn knex migrate:latest')
-  })
+beforeEach(async () => {
+  execSync('npx prisma migrate dev')
+})
 
-  it('User can create a new transaction', async () => {
+describe('User Route', () => {
+  it('must be possible to create a user', async () => {
     await request(app.server)
-      .post('/transactions')
+      .post('/user')
       .send({
-        title: 'Cartão de Crédito',
-        amount: 1500,
-        type: 'credit',
+        email: 'test@example.com',
       })
       .expect(201)
   })
-
+})
+describe('Meals Routes', () => {
   it('User should be able to list all transactions', async () => {
-    const createdTransaction = await request(app.server)
-      .post('/transactions')
+    const user = await request(app.server)
+      .post('/user')
       .send({
-        title: 'Cartão de Crédito',
-        amount: 1500,
-        type: 'credit',
+        email: 'test2@example.com',
       })
-    const cookies = createdTransaction.get(`Set-Cookie`)
+      .expect(201)
 
+    const cookies = user.get(`Set-Cookie`)
+
+    await request(app.server)
+      .post('/meals')
+      .set('Cookie', cookies)
+      .send({
+        name: 'Test meal',
+        description: 'This is a meal test',
+        isOnTheDiet: true,
+      })
+      .expect(201)
     const response = await request(app.server)
-      .get('/transactions')
+      .get('/meals')
       .set('Cookie', cookies)
       .expect(200)
 
-    expect(response.body.transactions).toEqual([
+    expect(response.body.meals).toEqual([
       expect.objectContaining({
-        title: 'Cartão de Crédito',
-        amount: 1500,
+        name: 'Test meal',
+        description: 'This is a meal test',
+        isOnTheDiet: true,
       }),
     ])
   })
 
   it('should be able to get a specific transaction', async () => {
-    const createTransactionResponse = await request(app.server)
-      .post('/transactions')
+    const user = await request(app.server)
+      .post('/user')
       .send({
-        title: 'New transaction',
-        amount: 5000,
-        type: 'credit',
+        email: 'test3@example.com',
       })
+      .expect(201)
 
-    const cookies = createTransactionResponse.get('Set-Cookie')
+    const cookies = user.get(`Set-Cookie`)
 
-    const listTransactionsResponse = await request(app.server)
-      .get('/transactions')
+    await request(app.server)
+      .post('/meals')
+      .set('Cookie', cookies)
+      .send({
+        name: 'Test meal',
+        description: 'This is a meal test',
+        isOnTheDiet: true,
+      })
+      .expect(201)
+
+    const listMealsResponse = await request(app.server)
+      .get('/meals')
       .set('Cookie', cookies)
       .expect(200)
 
-    const transactionId = listTransactionsResponse.body.transactions[0].id
+    const mealID = listMealsResponse.body.meals[0].id
 
     const getTransactionResponse = await request(app.server)
-      .get(`/transactions/${transactionId}`)
+      .get(`/meals/${mealID}`)
       .set('Cookie', cookies)
       .expect(200)
 
-    expect(getTransactionResponse.body.transaction).toEqual(
+    expect(getTransactionResponse.body.meal).toEqual(
       expect.objectContaining({
-        title: 'New transaction',
-        amount: 5000,
+        name: 'Test meal',
+        description: 'This is a meal test',
+        isOnTheDiet: true,
       }),
     )
   })
+})
 
-  it('should be able to get the summary', async () => {
-    const createTransactionResponse = await request(app.server)
-      .post('/transactions')
+describe('Summary Routes', () => {
+  it('User should be able to get the summary', async () => {
+    const user = await request(app.server)
+      .post('/user')
       .send({
-        title: 'Credit transaction',
-        amount: 5000,
-        type: 'credit',
+        email: 'test4@example.com',
       })
+      .expect(201)
 
-    const cookies = createTransactionResponse.get('Set-Cookie')
+    const cookies = user.get(`Set-Cookie`)
 
     await request(app.server)
-      .post('/transactions')
+      .post('/meals')
       .set('Cookie', cookies)
       .send({
-        title: 'Debit transaction',
-        amount: 2000,
-        type: 'debit',
+        name: 'Test meal',
+        description: 'This is a meal test',
+        isOnTheDiet: true,
       })
+      .expect(201)
 
-    const summaryResponse = await request(app.server)
-      .get('/transactions/summary')
+    await request(app.server)
+      .post('/meals')
+      .set('Cookie', cookies)
+      .send({
+        name: 'Test meal 2',
+        description: 'This is a meal test',
+        isOnTheDiet: true,
+      })
+      .expect(201)
+
+    const response = await request(app.server)
+      .get('/summary')
       .set('Cookie', cookies)
       .expect(200)
 
-    expect(summaryResponse.body.summary).toEqual({
-      amount: 3000,
-    })
+    expect(response.body.summary).toEqual(
+      expect.objectContaining({
+        totalMeals: 2,
+        healthMeals: 2,
+        junkMeals: 0,
+        healthFoodStreak: 2,
+      }),
+    )
   })
 })

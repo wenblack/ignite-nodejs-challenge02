@@ -1,11 +1,10 @@
 import { FastifyInstance } from 'fastify'
-import { z } from 'zod'
 import { PrismaClient } from '@prisma/client'
 
 const prisma = new PrismaClient()
 
 export async function summaryRoute(app: FastifyInstance) {
-  app.get('', async (req, res) => {
+  app.get('', async (req) => {
     const email = req.cookies.userID
     const hasUser = await prisma.user.findUnique({
       where: {
