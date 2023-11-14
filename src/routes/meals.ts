@@ -83,6 +83,61 @@ export async function mealsRoutes(app: FastifyInstance) {
     return res.status(201).send()
   })
 
+  app.put(
+    '/:id',
+    { preHandler: [AuthenticationMiddleware] },
+    async (req, res) => {
+      const email = req.cookies.userID
+      const transactionParamsSchema = z.object({
+        id: z.string().uuid(),
+      })
+      const { id } = transactionParamsSchema.parse(req.params)
+      const transactionBodySchema = z.object({
+        name: z.string(),
+        description: z.string(),
+        isOnTheDiet: z.boolean(),
+      })
+      const { name, description, isOnTheDiet } = transactionBodySchema.parse(
+        req.body,
+      )
+
+      const hasUser = await prisma.user.findUnique({
+        where: {
+          email,
+        },
+      })
+      const lastHealthFoodStreak = Number(hasUser?.healthFoodStreak)
+
+      await prisma.meal.update({
+        where: {
+          id,
+          userEmail: email,
+        },
+        data: {
+          name,
+          description,
+          isOnTheDiet,
+        },
+      })
+      if (isOnTheDiet === false) {
+        await prisma.user.update({
+          where: { email: hasUser?.email },
+          data: {
+            healthFoodStreak: 0,
+          },
+        })
+      } else if (isOnTheDiet === true) {
+        await prisma.user.update({
+          where: { email: hasUser?.email },
+          data: {
+            healthFoodStreak: lastHealthFoodStreak + 1,
+          },
+        })
+      }
+      return res.status(201).send()
+    },
+  )
+
   app.delete(
     '/:id',
     { preHandler: [AuthenticationMiddleware] },
