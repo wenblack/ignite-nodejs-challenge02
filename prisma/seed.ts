@@ -9,6 +9,11 @@ async function main() {
       meals: {
         create: [
           {
+            name: 'launch ',
+            description: 'hamburguer',
+            isOnTheDiet: false,
+          },
+          {
             name: 'pre-workout ',
             description: '2 waxy scoops',
             isOnTheDiet: true,
@@ -18,13 +23,9 @@ async function main() {
             description: '3 whey  + Carb',
             isOnTheDiet: true,
           },
-          {
-            name: 'launch ',
-            description: 'hamburguer',
-            isOnTheDiet: false,
-          },
         ],
       },
+      healthFoodStreak: 2,
     },
   })
   const secondUserExample = await prisma.user.upsert({
@@ -40,17 +41,18 @@ async function main() {
             isOnTheDiet: false,
           },
           {
-            name: 'pos-workout ',
-            description: '3 whey  + Carb',
-            isOnTheDiet: true,
-          },
-          {
             name: 'launch ',
             description: 'hamburguer',
             isOnTheDiet: false,
           },
+          {
+            name: 'pos-workout ',
+            description: '3 whey  + Carb',
+            isOnTheDiet: true,
+          },
         ],
       },
+      healthFoodStreak: 1,
     },
   })
   console.log({ firstUserExample, secondUserExample })
