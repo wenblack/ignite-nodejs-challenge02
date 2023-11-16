@@ -2,6 +2,7 @@ import { afterAll, beforeAll, beforeEach, it, describe, expect } from 'vitest'
 import request from 'supertest'
 import { app } from '../src/app'
 import { execSync } from 'node:child_process'
+import { afterEach } from 'node:test'
 
 beforeAll(async () => {
   await app.ready()
@@ -9,6 +10,10 @@ beforeAll(async () => {
 
 afterAll(async () => {
   await app.close()
+})
+
+afterEach(async () => {
+  execSync('yarn delete')
 })
 
 beforeEach(async () => {

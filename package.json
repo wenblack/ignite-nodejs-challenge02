@@ -11,7 +11,8 @@
     "build": "tsup src --out-dir build",
     "dev": "tsx watch src/server.ts",
     "seed": "tsx prisma/seed.ts",
-    "lint": "eslint src --ext .ts --fix"
+    "lint": "eslint src --ext .ts --fix",
+    "delete":"rm database/app.db"
   },
   "keywords": [],
   "author": "",
